@@ -18,7 +18,7 @@ size_t backend_count;
 KeyboardMode *current_kb_mode = nullptr;
 
 GpioButtonMapping button_mappings[] = {
-    {&InputState::l,            9 },
+    { &InputState::l,            9},
     { &InputState::left,        15},
     { &InputState::down,        16},
     { &InputState::right,       14},
@@ -44,6 +44,7 @@ GpioButtonMapping button_mappings[] = {
     { &InputState::lightshield, 10},
     { &InputState::midshield,   11},
 };
+
 size_t button_count = sizeof(button_mappings) / sizeof(GpioButtonMapping);
 
 Pinout pinout = {
@@ -109,9 +110,9 @@ void setup() {
         backends = new CommunicationBackend *[backend_count] { primary_backend };
     }
 
-    // Default to Melee mode.
+    // Default to FGC mode.
     primary_backend->SetGameMode(
-        new Melee20Button(socd::SOCD_2IP_NO_REAC, { .crouch_walk_os = false })
+        new FgcMode(socd::SOCD_NEUTRAL, socd::SOCD_NEUTRAL)
     );
 }
 
